@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="LOG_PATH">/Users/seoseunghwan/dev/logs</Property>
+        <Property name="DEFAULT_PATTERN">[%d{yyyy-MM-dd HH:mm:ss.SSS}] %5p ${sys:PID} --- [%15.15t] %-40.40c{1.} : %m%n%xwEx</Property>
+        <Property name="COLOR_PATTERN">[%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint}] %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <Property name="TEST_PATTERN">%d %5p [%c] %m%n</Property>
+        <Property name="APPLICATION_NAME">springboot-was-base</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${COLOR_PATTERN}"/>
+        </Console>
+
+        <RollingFile name ="RollingFileAppender">
+            <FileName>${LOG_PATH}/${APPLICATION_NAME}.log</FileName>
+            <FilePattern>${LOG_PATH}/${APPLICATION_NAME}.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>
+            <PatternLayout>
+                <Pattern>${DEFAULT_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name ="RollingFileErrorAppender">
+            <FileName>${LOG_PATH}/${APPLICATION_NAME}_error.log</FileName>
+            <FilePattern>${LOG_PATH}/${APPLICATION_NAME}_error.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>
+            <PatternLayout>
+                <Pattern>${DEFAULT_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+
+    <Loggers>
+        <!-- Root : 일반적인 로그 정책, 반드시 하나 정의해야함 -->
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+            <AppenderRef ref="RollingFileErrorAppender" level="ERROR" />
+        </Root>
+
+        <!-- springframework logger -->
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- jdbc logger -->
+        <!-- 실행된 SQL 쿼리를 기록 -->
+        <Logger name="jdbc.sqlonly" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- 실행된 SQL 쿼리와 함께 그 실행 시간도 기록 -->
+        <Logger name="jdbc.sqltiming" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- SQL 쿼리 결과의 첫 번째 100개의 행을 테이블 형식으로 기록 -->
+        <Logger name="jdbc.resultsettable" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- JDBC 리소스 사용에 대한 감사 로그를 기록 ex) 커넥션이 열리고 닫히는 이벤트 등을 기록 -->
+        <Logger name="jdbc.audit" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- JDBC ResultSet의 내용을 기록 -->
+        <Logger name="jdbc.resultset" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+
+        <!-- JDBC 커넥션 관련 이벤트를 기록 ex) 커넥션이 열리고 닫히는 이벤트 등을 기록. -->
+        <Logger name="jdbc.connection" level="OFF" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>

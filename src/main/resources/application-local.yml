@@ -1,0 +1,45 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/swb
+    username: springboot-was-base-user
+    password: springboot-was-base
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  data:
+    redis:
+      host: localhost
+      port: 6379
+springdoc:
+  packages-to-scan: kr.co.springboot_was_base.api
+  default-produces-media-type: application/json;charset=UTF-8
+  default-consumes-media-type: application/json;charset=UTF-8
+  title: springboot was base local api swagger
+  version: v1.0.0
+  description: springboot was base api project description
+  cache:
+    disabled: true
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /api-docs
+    csrf:
+      enabled: true
+  api-docs:
+    path: /api-docs/json
+    groups:
+      enabled: true
+  servers:
+    - url: http://localhost:8080
+      description: Localhost Server
+    - url: http://localhost:8081
+      description: Localhost Server 2
+    - url: http://localhost:8082
+      description: Localhost Server 3
