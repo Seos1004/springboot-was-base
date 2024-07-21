@@ -13,7 +13,7 @@
             <PatternLayout pattern="${COLOR_PATTERN}"/>
         </Console>
 
-        <RollingFile name ="RollingFileAppender">
+       <!-- <RollingFile name ="RollingFileAppender">
             <FileName>${LOG_PATH}/${APPLICATION_NAME}.log</FileName>
             <FilePattern>${LOG_PATH}/${APPLICATION_NAME}.%d{yyyy-MM-dd-hh-mm}.%i.log</FilePattern>
             <PatternLayout>
@@ -22,7 +22,7 @@
             <Policies>
                 <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
-        </RollingFile>
+        </RollingFile>-->
 
         <RollingFile name ="RollingFileErrorAppender">
             <FileName>${LOG_PATH}/${APPLICATION_NAME}_error.log</FileName>

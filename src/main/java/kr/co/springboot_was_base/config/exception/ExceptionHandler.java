@@ -26,8 +26,8 @@ public class ExceptionHandler {
     public ExceptionResponseModel handleException(HttpServletRequest request , Exception e) throws Exception{
         log.info("[RestControllerExceptionHandler.handleException]");
         ExceptionResponseModel result = new ExceptionResponseModel(
-                exception enum
-                request.getRequestURI()
+                //exception enum
+                //request.getRequestURI()
         );
         errorLogging(e);
         return result;
