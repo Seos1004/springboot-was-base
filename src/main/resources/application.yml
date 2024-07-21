@@ -1,24 +1,11 @@
 spring:
+  profiles:
+    active: local # 기본으로 활성화할 profile
   application:
     name: springboot-was-base
-  datasource:
-    url: jdbc:postgresql://localhost:5432/swb
-    username: springboot-was-base-user
-    password: springboot-was-base
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 10
-      minimum-idle: 5
-      idle-timeout: 30000
-      max-lifetime: 1800000
-      connection-timeout: 30000
-
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-
   docker:
     compose:
       enabled: true
-      file: ./docker-compose.yml
+      file: classpath:/docker/springboot-was-base/docker-compose-${spring.profiles.active}.yml
+logging:
+  config: classpath:/log4j2/log4j2-${spring.profiles.active}.xml

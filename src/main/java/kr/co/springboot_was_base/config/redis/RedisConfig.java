@@ -1,28 +1,24 @@
-package kr.co.springbootwasbaseinit.config.redis;
+package kr.co.springboot_was_base.config.redis;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-//@Order(Integer.MAX_VALUE)
 @Configuration
+@RequiredArgsConstructor
 @EnableRedisRepositories
 public class RedisConfig {
-    @Value("${spring.data.redis.host}")
-    private String redisHost;
 
-    @Value("${spring.data.redis.port}")
-    private int redisPort;
+    private final RedisProperties redisProperties;
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory(){
-        return new LettuceConnectionFactory(redisHost , redisPort);
+        return new LettuceConnectionFactory(redisProperties.getHost() , redisProperties.getPort());
     }
 
     @Bean
