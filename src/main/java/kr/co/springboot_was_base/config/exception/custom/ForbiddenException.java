@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class InterfaceException extends RuntimeException{
+public class ForbiddenException extends RuntimeException{
     private GlobalExceptionResponseEnum globalExceptionResponseEnum;
     private Exception exception;
 
-    public InterfaceException(GlobalExceptionResponseEnum globalExceptionResponseEnum){
+    public ForbiddenException(GlobalExceptionResponseEnum globalExceptionResponseEnum){
         this.globalExceptionResponseEnum = globalExceptionResponseEnum;
     }
 }

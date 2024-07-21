@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 @Getter
 public enum TimeFormatEnum {
 
-    DATE_TIME_MILLIS("yyyy-MM-dd HH:mm:ss.SSS"),
-    DATE_TIME_SECONDS("yyyy-MM-dd HH:mm:ss"),
+    DATE_TIME_MILLIS("yyyy-MM-dd HH:mm:ss.SSS'Z'"),
+    DATE_TIME_SECONDS("yyyy-MM-dd HH:mm:ss'Z'"),
     DATE_ONLY("yyyy-MM-dd"),
-    TIME_ONLY_HOURS_MINUTES("HH:mm"),
-    TIME_ONLY_HOURS_MINUTES_SECONDS("HH:mm:ss");
+    TIME_ONLY_HOURS_MINUTES("HH:mm'Z'"),
+    TIME_ONLY_HOURS_MINUTES_SECONDS("HH:mm:ss'Z'");
 
     private final DateTimeFormatter formatter;
 

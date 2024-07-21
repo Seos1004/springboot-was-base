@@ -2,6 +2,7 @@ package kr.co.springboot_was_base.common.util.redis.model;
 
 import lombok.*;
 
+
 @Getter
 @Setter
 @ToString
