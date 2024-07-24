@@ -35,7 +35,7 @@ public class HashRedisController {
             @PathVariable("key") String key,
             @Parameter(hidden = true) @Valid HashRedisAPIModel.GetHashTypeRequestModel getHashTypeRequestModel)
     {
-        //todo 1. sample 컨트롤러 , @Valid 인자별 터지는거 정리해서 주석
+        //todo 1. sample 컨트롤러 , @Valid 인자별 터지는거 정리해서 주석 (완)
         //todo 2. 레디스 케이스별 코드
         //todo 3. restCLient
         //todo 4. custom e

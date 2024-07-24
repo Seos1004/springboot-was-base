@@ -68,14 +68,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    public ExceptionResponseModel handleMethodArgumentNotValidException(HttpServletRequest request , MethodArgumentNotValidException e) {
-        log.error("[GlobalExceptionHandler.handleMethodArgumentNotValidException] {}" , request.getRequestURI());
-        log.info("{}" , e.getDetailMessageArguments());
+    public ExceptionResponseModel methodArgumentNotValidException(HttpServletRequest request , MethodArgumentNotValidException e) {
+        log.error("[GlobalExceptionHandler.methodArgumentNotValidException] {}" , request.getRequestURI());
         String aggregatedErrors = e.getBindingResult().getFieldErrors().stream()
                 .map(error -> String.format("[%s : %s -> %s]", error.getField(), error.getDefaultMessage(), error.getRejectedValue()))
                 .collect(Collectors.joining("\n"));
         String detailedErrorMessage = String.format("요청 값을 확인해주세요. %s", aggregatedErrors);
-        log.error("[GlobalExceptionHandler.handleMethodArgumentNotValidException] {} : {}" , request.getRequestURI() , detailedErrorMessage);
+        log.error("[GlobalExceptionHandler.methodArgumentNotValidException] {} : {}" , request.getRequestURI() , detailedErrorMessage);
         return new ExceptionResponseModel(GlobalExceptionResponseEnum.BAD_REQUEST_CUSTOM_MESSAGE , request , detailedErrorMessage);
     }
 
