@@ -2,21 +2,23 @@ spring:
   config:
     activate:
       on-profile: local
+  # db설정 (kr.co.springboot_was_base.config.datasource 패키지 안에서 bean으로 관리)
   datasource:
-    url: jdbc:postgresql://localhost:5432/swb
-    username: springboot-was-base-user
-    password: springboot-was-base
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 10
-      minimum-idle: 5
-      idle-timeout: 30000
-      max-lifetime: 1800000
-      connection-timeout: 30000
+    postgresql:
+      url: "jdbc:postgresql://localhost:5432/swb"
+      driver-class-name: "org.postgresql.Driver"
+      user-name: "springboot-was-base-user"
+      password: "springboot-was-base"
+    oracle:
+      url: "jdbc:oracle:thin:@localhost:1521:xe"
+      driver-class-name: "oracle.jdbc.OracleDriver"
+      user-name: "swb"
+      password: "swb"
   data:
     redis:
       host: localhost
       port: 6379
+
 springdoc:
   packages-to-scan: kr.co.springboot_was_base.api
   default-produces-media-type: application/json;charset=UTF-8

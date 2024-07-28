@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  oracle:
+    image: oracleinanutshell/oracle-xe-11g
+    environment:
+      ORACLE_ALLOW_REMOTE: true
+    ports:
+      - "1521:1521"
+    volumes:
+      - swb-oracle-data:/opt/oracle
   postgres:
     image: postgres:16
     environment:
@@ -18,5 +26,12 @@ services:
     volumes:
       - redis-data:/data
 volumes:
+  swb-oracle-data:
   postgres-data:
   redis-data:
+
+  # oracle 초기 init
+  # system / oracle
+  # create user swb identified by swb;
+  # GRANT CONNECT , RESOURCE , DBA TO swb;
+  # COMMIT;
