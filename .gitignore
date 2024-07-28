@@ -1,28 +1,70 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Compiled class file
+*.class
 
-### Gradle ###
-.gradle/
-/build/
-.gradletasknamecache
+# Log file
+*.log
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+out/
+
+# Eclipse #
+*.classpath
+*.project
+
+### STS (Spring Tool Suite) ###
+.apt_generated
+.factorypath
+.settings
+.springBeans
+.sts4-cache
+
+### Maven ###
+!/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+/target/
+*.fn
+*.bak
+*.swp
+~*
+/projectFilesBackup
+.classpath
+*.hprof
+*.releaseBackup
+*.hprof
+repositories.xml
+/release.properties
+HELP.md
+
+### Gradle ###
+.gradle/
+gradle/
+/build/
+* .gradletasknamecache
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,9 +72,13 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# Mac OS X #
+*.DS_Store
+
+# Windows #
+Thumbs.db
+Desktop.ini
+
+# VS Code #
 .vscode/
