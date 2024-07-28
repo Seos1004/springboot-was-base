@@ -1,23 +1,24 @@
-package kr.co.springboot_was_base.common.util.redis;
+package kr.co.springboot_was_base.common.component.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.co.springboot_was_base.common.util.redis.model.HashRedisModel;
+import kr.co.springboot_was_base.common.component.redis.enums.CreateHashKeyResultEnum;
+import kr.co.springboot_was_base.common.component.redis.model.HashRedisModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class HashRedisUtil {
+public class HashRedisComponent {
     private final RedisTemplate<String, Object> redisTemplate;
     private final ObjectMapper objectMapper;
+
     public <T> T getHash(String key , Class<T> returnClass){
         log.info("[HashRedisUtil.getHashType] START {}" , key);
         Map<Object, Object> entries = redisTemplate.opsForHash().entries(key);
@@ -43,18 +44,29 @@ public class HashRedisUtil {
         }
     }
 
-    public void createHashKey(String key , List<HashRedisModel> hashRedisModel , int expireTime){
-        log.info("[HashRedisUtil.addRedis] START {}.{}" , key , expireTime);
-        if(hashRedisModel == null || hashRedisModel.isEmpty()){
-            log.info("[HashRedisUtil.addRedis] CreateKeyModel list is null or size is 0");
-            return;
+    public CreateHashKeyResultEnum createHashKey(HashRedisModel hashRedis){
+        log.info("[HashRedisUtil.addRedis] START {}.{}" , hashRedis.getKey() , hashRedis.getExpireTime());
+        String key = hashRedis.getKey();
+        Integer expireTime = hashRedis.getExpireTime();
+        if(key.isEmpty() || key.isBlank()){
+            log.info("[HashRedisUtil.addRedis] ket is empty or blank : {}" , key);
+            return CreateHashKeyResultEnum.FAILURE_DUE_TO_KEY;
+        }
+        if(hashRedis.getElements() == null || hashRedis.getElements().isEmpty()){
+            log.info("[HashRedisUtil.addRedis] hashRedisCreateList list is null or size is 0 : {}" , hashRedis.getElements());
+            return CreateHashKeyResultEnum.ELEMENTAL_FAILURE;
+        }
+        if(expireTime <= 0){
+            log.info("[HashRedisUtil.addRedis] expireTime 0 : {}" , expireTime);
+            return CreateHashKeyResultEnum.FAILURE_DUE_TO_EXPIRATION_TIME;
         }
         HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
-        hashRedisModel.forEach(model ->
+        hashRedis.getElements().forEach(model ->
                 hashOperations.put(key, model.getKey(), model.getValue())
         );
         redisTemplate.expire(key, expireTime, TimeUnit.MILLISECONDS);
         log.info("[HashRedisUtil.addRedis] END {}.{}" , key , expireTime);
+        return CreateHashKeyResultEnum.SUCCESS;
     }
 
     public void deleteHashKey(String key){

@@ -5,6 +5,8 @@ import lombok.Getter;
 
 @Getter
 public enum SampleExceptionResponseEnum implements ExceptionResponseContract {
+
+    //xxx99xxx
     // getSample process enum
     FAIL("40001001", 400, "Success message %s");
     // postSample process enum

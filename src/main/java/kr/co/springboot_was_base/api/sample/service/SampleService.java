@@ -4,6 +4,7 @@ import kr.co.springboot_was_base.api.sample.model.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class SampleService {
                 )))
                 .build();
     }
+
     public PostSampleModel.Response postSample(PostSampleModel.Request requestModel , PostSampleModel.RequestBody requestBody) {
         log.info("[SampleService.postSample] start {}" , requestModel.getSampleKey());
         log.info("[SampleService.postSample] end {}" , requestModel);

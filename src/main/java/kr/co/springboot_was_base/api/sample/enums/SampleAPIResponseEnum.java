@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum SampleAPIResponseEnum implements APIResponseContract {
+    //xxx99xxx
     // getSample process enum
     GET_SAMPLE_SUCCESS("20099001", 200, "리소스를 정상적으로 조회하였씁니다."),
 

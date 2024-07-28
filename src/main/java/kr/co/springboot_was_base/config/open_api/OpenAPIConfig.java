@@ -22,6 +22,7 @@ public class OpenAPIConfig {
                 .build();
     }
 
+
     @Bean
     public GroupedOpenApi sampleApi() {
         return GroupedOpenApi.builder()

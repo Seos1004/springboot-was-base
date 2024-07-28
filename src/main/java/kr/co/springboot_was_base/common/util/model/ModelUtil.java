@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ModelUtil {
-    private static ModelMapper modelMapper = new ModelMapper();
+    private static final ModelMapper modelMapper = new ModelMapper();
 
     public static <S, T> T copy(S source, Class<T> targetClass) {
         return modelMapper.map(source, targetClass);
